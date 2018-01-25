@@ -15,7 +15,10 @@ import javax.swing.JButton;
  * @author carlosabia
  */
 public class VentanaAhorcado extends javax.swing.JFrame {
-
+    
+    String palabraOculta = "CETYS";
+    int numeroDeFallos = 0;
+    
     /**
      * Creates new form VentanaAhorcado
      */
@@ -25,13 +28,48 @@ public class VentanaAhorcado extends javax.swing.JFrame {
         dibujaImagen(0);
     }
     
+    private void chequeaLetra (String letra){
+        boolean acierto = false;
+        letra = letra.toUpperCase();
+        String palabraConGuiones = jLabel1.getText();
+        for(int i=0; i < palabraOculta.length(); i++){
+            if(letra.charAt(0) == palabraOculta.charAt(i)){
+                //TODO quita el guión bajo de la letra correspondiente 
+                palabraConGuiones = palabraConGuiones.substring(0, 2*i) + letra + 
+                        palabraConGuiones.substring(2*i +1);
+                acierto = true;
+            }
+        }
+        //actualizo el valor que se muestra en la pantalla con las letras 
+        //adivinadas.
+        jLabel1.setText(palabraConGuiones);
+        if(!acierto){
+            numeroDeFallos ++;
+            dibujaImagen(numeroDeFallos);
+        }
+    }
+    
     private void chequeaBoton(JButton _boton){
         _boton.setEnabled(false);
+        chequeaLetra(_boton.getText());
            
     }
     
     private void dibujaImagen(int numeroImagen){
-        URL nombreImagen = getClass().getResource("/imagenes/ahorcado_0.png");
+        String nombre = "";
+        URL nombreImagen;
+         switch(numeroImagen){
+            case 0 : nombre = "/imagenes/ahorcado_0.png"; break;
+            case 1 : nombre = "/imagenes/ahorcado_1.png"; break;
+            case 2 : nombre = "/imagenes/ahorcado_2.png"; break;
+            case 3 : nombre = "/imagenes/ahorcado_3.png"; break;
+            case 4 : nombre = "/imagenes/ahorcado_4.png"; break;
+            case 5 : nombre = "/imagenes/ahorcado_5.png"; break;
+            default : nombre = "/imagenes/ahorcado_fin.png"; break;      
+        }
+        nombreImagen = getClass().getResource(nombre);
+        
+        
         int ancho = jLabel2.getWidth();
         int alto = jLabel2.getHeight();
         ImageIcon miImagen = new ImageIcon( new ImageIcon(nombreImagen).getImage().getScaledInstance(ancho, alto, Image.SCALE_DEFAULT));
