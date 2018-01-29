@@ -9,16 +9,21 @@ import java.awt.Image;
 import java.net.URL;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
-
+/*
+TODO
+    - Metodo para saber si la partida ha finalizado
+    - Que si un botón está deshabilitado no cuente a la hora de elegir una letra
+    - Que la palabra a adivinar se elija random entre una lista (un array de palabras)
+*/
 /**
  *
  * @author carlosabia
  */
 public class VentanaAhorcado extends javax.swing.JFrame {
-    
+
     String palabraOculta = "CETYS";
     int numeroDeFallos = 0;
-    
+
     /**
      * Creates new form VentanaAhorcado
      */
@@ -28,55 +33,73 @@ public class VentanaAhorcado extends javax.swing.JFrame {
         dibujaImagen(0);
     }
     
-    private void chequeaLetra (String letra){
+    private void chequeaLetra(String letra) {
         boolean acierto = false;
         letra = letra.toUpperCase();
         String palabraConGuiones = jLabel1.getText();
-        for(int i=0; i < palabraOculta.length(); i++){
-            if(letra.charAt(0) == palabraOculta.charAt(i)){
+        for (int i = 0; i < palabraOculta.length(); i++) {
+            if (letra.charAt(0) == palabraOculta.charAt(i)) {
                 //TODO quita el guión bajo de la letra correspondiente 
-                palabraConGuiones = palabraConGuiones.substring(0, 2*i) + letra + 
-                        palabraConGuiones.substring(2*i +1);
+                palabraConGuiones = palabraConGuiones.substring(0, 2 * i) + letra
+                        + palabraConGuiones.substring(2 * i + 1);
                 acierto = true;
             }
         }
         //actualizo el valor que se muestra en la pantalla con las letras 
         //adivinadas.
         jLabel1.setText(palabraConGuiones);
-        if(!acierto){
-            numeroDeFallos ++;
+        if (!acierto) {
+            numeroDeFallos++;
             dibujaImagen(numeroDeFallos);
         }
     }
-    
-    private void chequeaBoton(JButton _boton){
-        _boton.setEnabled(false);
-        chequeaLetra(_boton.getText());
-           
+
+    private void chequeaBoton(JButton _boton) {
+        if(_boton.isEnabled()){
+            _boton.setEnabled(false);
+            chequeaLetra(_boton.getText());
+        }
+        
+        
+
     }
-    
-    private void dibujaImagen(int numeroImagen){
+
+    private void dibujaImagen(int numeroImagen) {
         String nombre = "";
         URL nombreImagen;
-         switch(numeroImagen){
-            case 0 : nombre = "/imagenes/ahorcado_0.png"; break;
-            case 1 : nombre = "/imagenes/ahorcado_1.png"; break;
-            case 2 : nombre = "/imagenes/ahorcado_2.png"; break;
-            case 3 : nombre = "/imagenes/ahorcado_3.png"; break;
-            case 4 : nombre = "/imagenes/ahorcado_4.png"; break;
-            case 5 : nombre = "/imagenes/ahorcado_5.png"; break;
-            default : nombre = "/imagenes/ahorcado_fin.png"; break;      
+        switch (numeroImagen) {
+            case 0:
+                nombre = "/imagenes/ahorcado_0.png";
+                break;
+            case 1:
+                nombre = "/imagenes/ahorcado_1.png";
+                break;
+            case 2:
+                nombre = "/imagenes/ahorcado_2.png";
+                break;
+            case 3:
+                nombre = "/imagenes/ahorcado_3.png";
+                break;
+            case 4:
+                nombre = "/imagenes/ahorcado_4.png";
+                break;
+            case 5:
+                nombre = "/imagenes/ahorcado_5.png";
+                break;
+            default:
+                nombre = "/imagenes/ahorcado_fin.png";
+                break;
         }
         nombreImagen = getClass().getResource(nombre);
-        
-        
+
         int ancho = jLabel2.getWidth();
         int alto = jLabel2.getHeight();
-        ImageIcon miImagen = new ImageIcon( new ImageIcon(nombreImagen).getImage().getScaledInstance(ancho, alto, Image.SCALE_DEFAULT));
-        
+        ImageIcon miImagen = new ImageIcon(new ImageIcon(nombreImagen).getImage().getScaledInstance(ancho, alto, Image.SCALE_DEFAULT));
+
         jLabel2.setIcon(miImagen);
-       
+
     }
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -529,115 +552,115 @@ public class VentanaAhorcado extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void botonAMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_botonAMousePressed
-        chequeaBoton( (JButton) evt.getSource());
+        chequeaBoton((JButton) evt.getSource());
     }//GEN-LAST:event_botonAMousePressed
 
     private void botonCMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_botonCMousePressed
-        chequeaBoton( (JButton) evt.getSource());
+        chequeaBoton((JButton) evt.getSource());
     }//GEN-LAST:event_botonCMousePressed
 
     private void botonDMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_botonDMousePressed
-        chequeaBoton( (JButton) evt.getSource());
+        chequeaBoton((JButton) evt.getSource());
     }//GEN-LAST:event_botonDMousePressed
 
     private void botonEMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_botonEMousePressed
-        chequeaBoton( (JButton) evt.getSource());
+        chequeaBoton((JButton) evt.getSource());
     }//GEN-LAST:event_botonEMousePressed
 
     private void botonFMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_botonFMousePressed
-        chequeaBoton( (JButton) evt.getSource());
+        chequeaBoton((JButton) evt.getSource());
     }//GEN-LAST:event_botonFMousePressed
 
     private void botonGMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_botonGMousePressed
-        chequeaBoton( (JButton) evt.getSource());
+        chequeaBoton((JButton) evt.getSource());
     }//GEN-LAST:event_botonGMousePressed
 
     private void botonBMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_botonBMousePressed
-        chequeaBoton( (JButton) evt.getSource());
+        chequeaBoton((JButton) evt.getSource());
     }//GEN-LAST:event_botonBMousePressed
 
     private void botonJMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_botonJMousePressed
-        chequeaBoton( (JButton) evt.getSource());
+        chequeaBoton((JButton) evt.getSource());
     }//GEN-LAST:event_botonJMousePressed
 
     private void botonKMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_botonKMousePressed
-        chequeaBoton( (JButton) evt.getSource());
+        chequeaBoton((JButton) evt.getSource());
     }//GEN-LAST:event_botonKMousePressed
 
     private void botonLMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_botonLMousePressed
-        chequeaBoton( (JButton) evt.getSource());
+        chequeaBoton((JButton) evt.getSource());
     }//GEN-LAST:event_botonLMousePressed
 
     private void botonHMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_botonHMousePressed
-        chequeaBoton( (JButton) evt.getSource());
+        chequeaBoton((JButton) evt.getSource());
     }//GEN-LAST:event_botonHMousePressed
 
     private void botonMMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_botonMMousePressed
-        chequeaBoton( (JButton) evt.getSource());
+        chequeaBoton((JButton) evt.getSource());
     }//GEN-LAST:event_botonMMousePressed
 
     private void botonNMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_botonNMousePressed
-        chequeaBoton( (JButton) evt.getSource());
+        chequeaBoton((JButton) evt.getSource());
     }//GEN-LAST:event_botonNMousePressed
 
     private void botonIMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_botonIMousePressed
-        chequeaBoton( (JButton) evt.getSource());
+        chequeaBoton((JButton) evt.getSource());
     }//GEN-LAST:event_botonIMousePressed
 
     private void botonPMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_botonPMousePressed
-        chequeaBoton( (JButton) evt.getSource());
+        chequeaBoton((JButton) evt.getSource());
     }//GEN-LAST:event_botonPMousePressed
 
     private void botonQMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_botonQMousePressed
-        chequeaBoton( (JButton) evt.getSource());
+        chequeaBoton((JButton) evt.getSource());
     }//GEN-LAST:event_botonQMousePressed
 
     private void botonRMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_botonRMousePressed
-        chequeaBoton( (JButton) evt.getSource());
+        chequeaBoton((JButton) evt.getSource());
     }//GEN-LAST:event_botonRMousePressed
 
     private void botonÑMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_botonÑMousePressed
-        chequeaBoton( (JButton) evt.getSource());
+        chequeaBoton((JButton) evt.getSource());
     }//GEN-LAST:event_botonÑMousePressed
 
     private void botonSMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_botonSMousePressed
-        chequeaBoton( (JButton) evt.getSource());
+        chequeaBoton((JButton) evt.getSource());
     }//GEN-LAST:event_botonSMousePressed
 
     private void botonTMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_botonTMousePressed
-        chequeaBoton( (JButton) evt.getSource());
+        chequeaBoton((JButton) evt.getSource());
     }//GEN-LAST:event_botonTMousePressed
 
     private void botonOMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_botonOMousePressed
-        chequeaBoton( (JButton) evt.getSource());
+        chequeaBoton((JButton) evt.getSource());
     }//GEN-LAST:event_botonOMousePressed
 
     private void jButton23MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton23MousePressed
-        chequeaBoton( (JButton) evt.getSource());
+        chequeaBoton((JButton) evt.getSource());
     }//GEN-LAST:event_jButton23MousePressed
 
     private void botonXMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_botonXMousePressed
-        chequeaBoton( (JButton) evt.getSource());
+        chequeaBoton((JButton) evt.getSource());
     }//GEN-LAST:event_botonXMousePressed
 
     private void botonUMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_botonUMousePressed
-        chequeaBoton( (JButton) evt.getSource());
+        chequeaBoton((JButton) evt.getSource());
     }//GEN-LAST:event_botonUMousePressed
 
     private void botonYMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_botonYMousePressed
-        chequeaBoton( (JButton) evt.getSource());
+        chequeaBoton((JButton) evt.getSource());
     }//GEN-LAST:event_botonYMousePressed
 
     private void botonZMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_botonZMousePressed
-        chequeaBoton( (JButton) evt.getSource());
+        chequeaBoton((JButton) evt.getSource());
     }//GEN-LAST:event_botonZMousePressed
 
     private void botonVMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_botonVMousePressed
-        chequeaBoton( (JButton) evt.getSource());
+        chequeaBoton((JButton) evt.getSource());
     }//GEN-LAST:event_botonVMousePressed
 
     private void botonWMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_botonWMousePressed
-        chequeaBoton( (JButton) evt.getSource());
+        chequeaBoton((JButton) evt.getSource());
     }//GEN-LAST:event_botonWMousePressed
 
     /**
